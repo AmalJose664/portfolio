@@ -1,0 +1,105 @@
+@import "tailwindcss";
+
+@theme {
+	--color-background: oklch(100% 0 0);
+	--color-foreground: oklch(9.61% 0 0);
+
+	--color-muted: oklch(96.08% 0 0);
+	--color-muted-foreground: oklch(52.94% 0 0);
+
+	--color-popover: oklch(100% 0 0);
+	--color-popover-foreground: oklch(9.61% 0 0);
+
+	--color-card: oklch(96.08% 0 0);
+	--color-card-foreground: oklch(9.61% 0 0);
+
+	--color-primary: oklch(0.7464 0.15 165.61);
+	--color-primary-foreground: oklch(15.69% 0 0);
+
+	--color-secondary: oklch(96.08% 0 0);
+	--color-secondary-foreground: oklch(21.57% 0 0);
+
+	--color-accent: oklch(96.08% 0 0);
+	--color-accent-foreground: oklch(21.57% 0 0);
+
+	--color-destructive: oklch(62.75% 0.258 29.23);
+	--color-destructive-foreground: oklch(98.04% 0 0);
+
+	--color-border: oklch(89.8% 0 0);
+	--color-input: oklch(89.8% 0 0);
+	--color-ring: oklch(9.61% 0 0);
+
+	--radius: 0.2rem;
+}
+
+.dark {
+	--color-background: oklch(9.61% 0 0);
+	--color-foreground: oklch(98.04% 0 0);
+
+	--color-muted: oklch(21.57% 0 0);
+	--color-muted-foreground: oklch(70.59% 0 0);
+
+	--color-popover: oklch(9.61% 0 0);
+	--color-popover-foreground: oklch(98.04% 0 0);
+
+	--color-card: oklch(21.57% 0 0);
+	--color-card-foreground: oklch(98.04% 0 0);
+
+	--color-primary: oklch(0.7464 0.15 165.61);
+	--color-primary-foreground: oklch(15.69% 0 0);
+
+	--color-secondary: oklch(33.33% 0 0);
+	--color-secondary-foreground: oklch(98.04% 0 0);
+
+	--color-accent: oklch(33.33% 0 0);
+	--color-accent-foreground: oklch(98.04% 0 0);
+
+	--color-destructive: oklch(45.1% 0.154 29.23);
+	--color-destructive-foreground: oklch(98.04% 0 0);
+
+	--color-border: oklch(41.18% 0 0);
+	--color-input: oklch(33.33% 0 0);
+	--color-ring: oklch(85.1% 0 0);
+}
+
+* {
+	border-color: var(--color-border);
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+}
+
+/* Performance optimizations */
+* {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+/* Optimize animations */
+img {
+	content-visibility: auto;
+}
+
+/* GPU acceleration for transforms */
+[class*="motion"] {
+	will-change: transform, opacity;
+	transform: translateZ(0);
+	backface-visibility: hidden;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
