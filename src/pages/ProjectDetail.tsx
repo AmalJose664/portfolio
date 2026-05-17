@@ -1,8 +1,12 @@
+import { lazy, Suspense } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { CodeXml, Lightbulb, Users, ExternalLink, Radio } from 'lucide-react';
 import Width from '../components/utils/Width';
-import Carousel from '../components/ui/Carousel';
-import { projects } from '../lib/data';
+import { projects, skills } from '../lib/data';
+import TechStackUI from '../components/ui/TechStackUI';
+
+// Lazy load Carousel
+const Carousel = lazy(() => import('../components/ui/Carousel'));
 
 function toHumanDateTime(date: Date) {
 	return date.toLocaleDateString('en-UK', {
@@ -29,7 +33,15 @@ export default function ProjectDetail() {
 
 	return (
 		<Width className="pb-32 pt-24">
-			<Carousel images={images} />
+			<Suspense
+				fallback={
+					<div className="mb-12 flex aspect-video items-center justify-center rounded-lg bg-muted">
+						<div className="size-12 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+					</div>
+				}
+			>
+				<Carousel images={images} />
+			</Suspense>
 			<article>
 				<section className="mb-8">
 					{project.live && (
@@ -55,11 +67,25 @@ export default function ProjectDetail() {
 							Technologies
 						</h2>
 						<ul className="flex flex-wrap gap-x-2 gap-y-4">
-							{project.stack.map((tech) => (
-								<li key={tech} className="rounded-full bg-muted px-4 py-1 text-xs text-muted-foreground">
-									{tech}
-								</li>
-							))}
+							{project.stack.map((tech) => {
+								let techRefined = tech.toLocaleLowerCase().replaceAll(".", "")
+								if (techRefined.includes("/")) {
+									techRefined = techRefined.replaceAll("/", "")
+								}
+								const object = skills[techRefined]
+								if (!object) {
+									return (
+										<li key={tech} className="rounded-full bg-muted px-4 flex items-center justify-center text-sm text-muted-foreground">
+											{tech}
+										</li>
+									)
+								}
+								return (
+									<>
+										{skills[techRefined] && <TechStackUI skill={skills[techRefined]} isDark />}
+									</>
+								)
+							})}
 						</ul>
 					</div>
 

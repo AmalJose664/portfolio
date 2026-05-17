@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Width from '../utils/Width';
 import { projects } from '../../lib/data';
 import type { Project } from '../../lib/types';
+import SplitText from '../ui/SplitText';
 
 function ProjectCard({ project, isEven }: { project: Project; isEven: boolean }) {
 	const flyDirection = isEven ? -1 : 1;
@@ -63,8 +64,8 @@ function ProjectCard({ project, isEven }: { project: Project; isEven: boolean })
 export default function Projects() {
 	return (
 		<Width>
-			<section className="mt-12 pb-12 pt-12 md:mt-20 md:pt-20" id="projects">
-				<motion.h1
+			<section className="mt-12 pb-12 md:mt-20" id="projects">
+				{/* <motion.h1
 					initial={{ opacity: 0, y: 20 }}
 					whileInView={{ opacity: 1, y: 0 }}
 					viewport={{ once: true, margin: "-50px" }}
@@ -72,12 +73,37 @@ export default function Projects() {
 					className="mb-16 text-4xl font-bold text-center"
 				>
 					Projects
-				</motion.h1>
+				</motion.h1> */}
+				<div className='flex items-center w-full justify-center mb-16 '>
+					<SplitText text='Projects' className='text-4xl font-bold text-center' />
+				</div>
 				<div className="space-y-16 lg:space-y-12">
 					{projects.map((project, index) => (
 						<ProjectCard key={project.id} project={project} isEven={index % 2 === 0} />
 					))}
 				</div>
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, margin: "-50px" }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+					className="mt-16 flex justify-center"
+				>
+					<Link
+						to="/projects"
+						className="group relative inline-flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/10 px-8 py-3 font-medium text-primary transition-all hover:border-primary/40 hover:bg-primary/20"
+					>
+						View All Projects
+						<svg
+							className="size-4 transition-transform group-hover:translate-x-1"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+						</svg>
+					</Link>
+				</motion.div>
 			</section>
 		</Width>
 	);

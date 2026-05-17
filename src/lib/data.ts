@@ -1,4 +1,4 @@
-import type { Experience, Project, Tool, Skill } from './types';
+import type { Experience, Project, Tool, SideProject, Education, Certification, SkillsObject } from './types';
 
 // Personal Information
 export const personalInfo = {
@@ -7,7 +7,7 @@ export const personalInfo = {
 		last: 'Jose',
 		full: 'Amal Jose'
 	},
-	title: 'Full stack Developer',
+	title: 'Full Stack Developer',
 	bio: 'Detail-oriented developer specializing in JavaScript, TypeScript, and backend systems. Passionate about building robust, scalable applications with meticulous attention to code quality and Linux-based infrastructure.',
 	email: 'amal446446@gmail.com',
 	phone: '+91 8301943079',
@@ -39,6 +39,48 @@ export const experiences: Experience[] = [
 
 ];
 
+// Education Data
+export const education: Education[] = [
+	{
+		title: 'Bachelor of Computer Applications (BCA)',
+		institution: 'MG University',
+		location: 'Kerala, India'
+	},
+	{
+		title: 'MERN Stack Development',
+		institution: 'Self-Learned',
+		description: 'Comprehensive self-study of MongoDB, Express.js, React, and Node.js ecosystem with hands-on full-stack application development.'
+	}
+];
+
+// Certifications Data
+export const certifications: Certification[] = [
+	{
+		title: 'JavaScript Algorithms and Data Structures',
+		issuer: 'freeCodeCamp',
+		description: 'Mastered ES6+, data structures, algorithm scripting, functional programming, and problem-solving techniques.',
+		url: 'https://www.freecodecamp.org/certification/amalmathewjose/javascript-algorithms-and-data-structures-v8'
+	},
+	{
+		title: 'Back End Development and APIs',
+		issuer: 'freeCodeCamp',
+		description: 'Built RESTful APIs and microservices using Node.js, Express, MongoDB, and authentication strategies.',
+		url: 'https://www.freecodecamp.org/certification/amalmathewjose/back-end-development-and-apis'
+	},
+	{
+		title: 'Software Engineer Certificate',
+		issuer: 'HackerRank',
+		description: 'Demonstrated proficiency in problem-solving, data structures, algorithms, and software engineering principles.',
+		url: 'https://www.hackerrank.com/certificates/5ebc165809a2'
+	},
+	{
+		title: 'IBM Cloud Essentials',
+		issuer: 'Cognitive Class',
+		description: 'Learned cloud computing fundamentals, IBM Cloud services, deployment strategies, and cloud architecture basics.',
+		url: 'https://courses.cognitiveclass.ai/certificates/b63ad19c0e8f46d4aa93e7305ea82ecf'
+	}
+];
+
 // Projects Data
 export const projects: Project[] = [
 	{
@@ -46,7 +88,7 @@ export const projects: Project[] = [
 		title: 'Lynfera',
 		description: 'Lynfera is an open-source, Vercel-like cloud deployment platform that automates frontend hosting and features a high-throughput, real-time log monitoring pipeline.',
 		thumbnail: 'https://i.ibb.co/rKw7NgSN/lynfera-root.webp',
-		stack: ['React', 'Next.js', 'Node.js', 'MongoDB', 'Stripe', 'Redis', 'Clickhouse', 'Kafka', 'Express.js', 'Reverse proxy', 'Docker', 'Github App', 'CI/CD'],
+		stack: ['React', 'Next.js', 'Node.js', 'MongoDB', 'Stripe', 'Redis', 'Clickhouse', 'Kafka', 'Express', 'Reverse proxy', 'Docker', 'Github App', 'CI/CD'],
 		live: 'https://app.lynfera.qzz.io',
 		images: [
 			'https://i.ibb.co/qLmXyXXh/lynfera-landing.webp',
@@ -97,7 +139,7 @@ export const projects: Project[] = [
 		title: 'Connectify Chats',
 		description: 'Connectify is a real-time, high-concurrency messaging platform featuring private chats, public groups, and live notifications inspired by WhatsApp Web. It utilizes a scalable WebSocket and Redis architecture to ensure seamless communication and instant message delivery.',
 		thumbnail: 'https://i.ibb.co/qLDh3MgH/connectify-home-page.webp',
-		stack: ['React.js', 'NeonDb', 'PostgreSQL', 'WebSocket', 'Django', 'Python', 'Django-channels'],
+		stack: ['React', 'NeonDb', 'PostgreSQL', 'WebSocket', 'Django', 'Python', 'Django-channels'],
 		live: 'https://connectify-roan-five.vercel.app/',
 		images: [
 			'https://i.ibb.co/qLDh3MgH/connectify-home-page.webp',
@@ -188,11 +230,11 @@ export const projects: Project[] = [
 		id: 'mpy20eq8fv',
 		title: 'Portfolio',
 		description:
-			'This is the project you are currently visiting. Wanted to try out and learn some new technologies as well as I needed a portfolio to get my name out there. Since this was a solo project I could select the exact technologies I was most interrested in and learned a lot along the way. Such as end-to-end testing, github actions and server-side vs client-side rendering.',
+			'This is the project you are currently visiting. Wanted to try out and learn some new technologies as well as I needed a portfolio to get my name out there. Since this was a solo project I could select the exact technologies I was most interrested in and learned a lot along the way.',
 		updatedAt: new Date('2024-11-11T20:44:00'),
 		thumbnail: 'https://i.ibb.co/7tQ7Dk6X/portfolio-landing.png',
 		images: ['https://i.ibb.co/7tQ7Dk6X/portfolio-landing.png'],
-		stack: ['React.js', 'Vite', 'TypeScript', 'Tailwindcss'],
+		stack: ['React', 'Vite', 'TypeScript', 'Tailwindcss'],
 		contributers: [
 			{ name: 'Amal Jose', href: 'https://github.com/AmalJose664' }
 		],
@@ -219,6 +261,39 @@ export const projects: Project[] = [
 	},
 ];
 
+// Side Projects Data (smaller projects with less detail)
+export const sideProjects: SideProject[] = [
+	{
+		id: 'side-project-1',
+		title: '3D Keyboard',
+		description: 'A 3D product showcase and e-commerce website. Features an immersive 3D UI and fluid animations to highlight the product. Built with Next.js, React Three Fiber, and GSAP, utilizing Prismic for CMS and Stripe for payments.',
+		stack: ['React', 'Next.js',],
+		github: 'https://github.com/AmalJose664/3d-keyboard-showcase',
+		live: 'https://3d-keyboard-showcase.vercel.app/'
+	},
+	{
+		id: 'side-project-2',
+		title: 'Simple Ecommerce website',
+		description: 'A learning-focused full-stack e-commerce application. Built to practice core backend development with Node.js, Express, and MongoDB, featuring user authentication, image uploads via Cloudinary, and Razorpay payment integration.',
+		stack: ['Express.js', 'Node.js', 'MongoDB'],
+		github: 'https://github.com/AmalJose664/Shopping-site'
+	},
+	{
+		id: 'side-project-3',
+		title: 'Passkey login with React',
+		description: 'A simple, full-stack implementation of Passkey authentication. Created to learn and demonstrate passwordless login using React, Express, and the SimpleWebAuthn libraries.',
+		stack: ['Node.js', 'Express.js', 'React.js'],
+		github: 'https://github.com/AmalJose664/Passkey-login-with-node-react',
+	},
+	{
+		id: 'side-project-4',
+		title: 'File Editor',
+		description: 'About A very simple online file editor with a terminal',
+		stack: ['Node.js', 'Express.js', 'React.js'],
+		github: 'https://github.com/AmalJose664/online-simple-ide'
+	},
+];
+
 // Technologies/Tools Data (Old format - keeping for compatibility)
 export const tools: Tool[] = [
 	{
@@ -227,29 +302,14 @@ export const tools: Tool[] = [
 		options: { bg: 'bg-blue-400/20' }
 	},
 	{
-		name: 'Svelte',
-		file: 'svelte.png',
-		options: { bg: 'bg-orange-400/20' }
-	},
-	{
 		name: 'Tailwind',
 		file: 'tailwind.png',
 		options: { bg: 'bg-blue-400/20' }
 	},
 	{
-		name: 'Drizzle',
-		file: 'drizzle.png',
-		options: { bg: 'bg-neutral-600/20' }
-	},
-	{
 		name: 'Java',
 		file: 'java.png',
 		options: { bg: 'bg-blue-400/20' }
-	},
-	{
-		name: 'Spring Boot',
-		file: 'spring-boot.png',
-		options: { bg: 'bg-green-400/20' }
 	},
 	{
 		name: 'PostgreSQL',
@@ -266,98 +326,95 @@ export const tools: Tool[] = [
 		file: 'docker.webp',
 		options: { bg: 'bg-blue-400/20' }
 	},
-	{
-		name: 'DigitalOcean',
-		file: 'digitalocean.png',
-		options: { bg: 'bg-neutral-400/20' }
-	},
-	{
-		name: 'Ansible',
-		file: 'ansible.png',
-		options: { bg: 'bg-neutral-400/20', invert: true }
-	},
-	{
-		name: 'Figma',
-		file: 'figma.png',
-		options: { bg: 'bg-violet-400/20' }
-	}
 ];
 
-// Skills Data (New format - categorized)
-export const skills: Skill[] = [
+// Skills Data (Object format - access via skills.javascript, skills.python, etc.)
+export const skills: SkillsObject = {
 	// Programming Languages
-	{
-		skill: 'JavaScript',
+	javascript: {
+		name: 'JavaScript',
+		commonName: 'javascript',
 		category: 'programming language',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg',
 		href: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript'
 	},
-	{
-		skill: 'TypeScript',
+	typescript: {
+		name: 'TypeScript',
+		commonName: 'typescript',
 		category: 'programming language',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg',
 		href: 'https://www.typescriptlang.org/'
 	},
-	{
-		skill: 'Python',
+	python: {
+		name: 'Python',
+		commonName: 'python',
 		category: 'programming language',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg',
 		href: 'https://www.python.org/'
 	},
-	{
-		skill: 'Java',
+	java: {
+		name: 'Java',
+		commonName: 'java',
 		category: 'programming language',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
 		href: 'https://www.java.com/'
 	},
-	{
-		skill: 'C',
+	c: {
+		name: 'C',
+		commonName: 'c',
 		category: 'programming language',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg',
 		href: 'https://en.wikipedia.org/wiki/C_(programming_language)'
 	},
-	{
-		skill: 'C++',
+	cpp: {
+		name: 'C++',
+		commonName: 'cpp',
 		category: 'programming language',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg',
 		href: 'https://isocpp.org/'
 	},
 
 	// Frameworks & Runtime
-	{
-		skill: 'React',
+	react: {
+		name: 'React',
+		commonName: 'react',
 		category: 'framework and runtime',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
 		href: 'https://react.dev/'
 	},
-	{
-		skill: 'Next.js',
+	nextjs: {
+		name: 'Next.js',
+		commonName: 'nextjs',
 		category: 'framework and runtime',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg',
 		invert: true,
 		href: 'https://nextjs.org/'
 	},
-	{
-		skill: 'Node.js',
+	nodejs: {
+		name: 'Node.js',
+		commonName: 'nodejs',
 		category: 'framework and runtime',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
 		href: 'https://nodejs.org/'
 	},
-	{
-		skill: 'Express',
+	express: {
+		name: 'Express',
+		commonName: 'express',
 		category: 'framework and runtime',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg',
 		invert: true,
 		href: 'https://expressjs.com/'
 	},
-	{
-		skill: 'Tailwind CSS',
+	tailwindcss: {
+		name: 'Tailwind CSS',
+		commonName: 'tailwindcss',
 		category: 'framework and runtime',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg',
 		href: 'https://tailwindcss.com/'
 	},
-	{
-		skill: 'Django',
+	django: {
+		name: 'Django',
+		commonName: 'django',
 		category: 'framework and runtime',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
 		invert: true,
@@ -365,46 +422,53 @@ export const skills: Skill[] = [
 	},
 
 	// Databases
-	{
-		skill: 'PostgreSQL',
+	postgresql: {
+		name: 'PostgreSQL',
+		commonName: 'postgresql',
 		category: 'databases',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg',
 		href: 'https://www.postgresql.org/'
 	},
-	{
-		skill: 'MongoDB',
+	mongodb: {
+		name: 'MongoDB',
+		commonName: 'mongodb',
 		category: 'databases',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg',
 		href: 'https://www.mongodb.com/'
 	},
-	{
-		skill: 'Redis',
+	redis: {
+		name: 'Redis',
+		commonName: 'redis',
 		category: 'databases',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg',
 		href: 'https://redis.io/'
 	},
-	{
-		skill: 'MySQL',
+	mysql: {
+		name: 'MySQL',
+		commonName: 'mysql',
 		category: 'databases',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
 		href: 'https://www.mysql.com/'
 	},
 
 	// Specializations
-	{
-		skill: 'REST APIs',
+	restapis: {
+		name: 'REST APIs',
+		commonName: 'restapis',
 		category: 'Specializations',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg',
 		href: 'https://restfulapi.net/'
 	},
-	{
-		skill: 'Responsive Design',
+	responsivedesign: {
+		name: 'Responsive Design',
+		commonName: 'responsivedesign',
 		category: 'Specializations',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg',
 		href: 'https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design'
 	},
-	{
-		skill: 'CI/CD',
+	cicd: {
+		name: 'CI/CD',
+		commonName: 'cicd',
 		category: 'Specializations',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
 		href: 'https://about.gitlab.com/topics/ci-cd/',
@@ -412,93 +476,107 @@ export const skills: Skill[] = [
 	},
 
 	// Tools & Platforms
-	{
-		skill: 'Git',
+	git: {
+		name: 'Git',
+		commonName: 'git',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg',
 		href: 'https://git-scm.com/'
 	},
-	{
-		skill: 'GitHub',
+	github: {
+		name: 'GitHub',
+		commonName: 'github',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
 		invert: true,
 		href: 'https://github.com/'
 	},
-	{
-		skill: 'Docker',
+	docker: {
+		name: 'Docker',
+		commonName: 'docker',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg',
 		href: 'https://www.docker.com/'
 	},
-	{
-		skill: 'VS Code',
+	vscode: {
+		name: 'VS Code',
+		commonName: 'vscode',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg',
 		href: 'https://code.visualstudio.com/'
 	},
-	{
-		skill: 'AWS',
+	aws: {
+		name: 'AWS',
+		commonName: 'aws',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg',
 		invert: true,
 		href: 'https://aws.amazon.com/'
 	},
-	{
-		skill: 'Vercel',
+	vercel: {
+		name: 'Vercel',
+		commonName: 'vercel',
 		category: 'tools',
 		icon: 'https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png',
 		invert: true,
 		href: 'https://vercel.com/'
 	},
-	{
-		skill: 'Nginx',
+	nginx: {
+		name: 'Nginx',
+		commonName: 'nginx',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg',
 		href: 'https://nginx.org/'
 	},
-	{
-		skill: 'Render',
+	render: {
+		name: 'Render',
+		commonName: 'render',
 		category: 'tools',
 		icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAABUElEQVR4nNVVu07DQBA8KBAUNNCBhHg0KSiQoKBDIt6Fig4plGn4jVR8Qgp+IRWPcGeTItSIkj54L4ZI+QWkQxvrzOEECfBZKCtN4bn1jL172hXCiYZpzALJGmp5DVq+Aql31MpMQJPzkcK65UCrR+aAom03NxOHl2gDtXz6RtAUMjjqqXXUcvBDcfMrAy7LhC9/CEidBfHdHsbRbh5B0lljsZPh1WI1bm8yDul2lbnT59ac5RgirbkjTvJCGDMjfAWSusl+k2S3qN5xLLfSiqQQoNWbY1AragD5HrhXEfrtHe8G6DzwYVEDpHAJtTy38G4wFr4Ngvh+BUldWng3gLJ7AGUbBGWXaCym7prCPzRZZoOJB5X3YVd6oLNIDnrd+RGXhBXLVfudZeZ4yeQXDp9l7ydhhbl9ai24ml96YJN4/X0uoLA+MtWq+aeVOfUGH4njtyeIZLk4AAAAAElFTkSuQmCC',
 		href: 'https://render.com/'
 	},
-	{
-		skill: 'Kubernetes',
+	kubernetes: {
+		name: 'Kubernetes',
+		commonName: 'kubernetes',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg',
 		href: 'https://kubernetes.io/'
 	},
-	{
-		skill: 'Supabase',
+	supabase: {
+		name: 'Supabase',
+		commonName: 'supabase',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/supabase/supabase-original.svg',
 		href: 'https://supabase.com/'
 	},
-	{
-		skill: 'Linux',
+	linux: {
+		name: 'Linux',
+		commonName: 'linux',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg',
 		href: 'https://www.linux.org/'
 	},
-	{
-		skill: 'Neovim',
+	neovim: {
+		name: 'Neovim',
+		commonName: 'neovim',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/neovim/neovim-original.svg',
 		href: 'https://neovim.io/'
 	},
-	{
-		skill: 'Netlify',
+	netlify: {
+		name: 'Netlify',
+		commonName: 'netlify',
 		category: 'tools',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netlify/netlify-original.svg',
 		href: 'https://www.netlify.com/'
 	},
 
 	// Other
-	{
-		skill: 'Blender',
+	blender: {
+		name: 'Blender',
+		commonName: 'blender',
 		category: 'others',
 		icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/blender/blender-original.svg',
 		href: 'https://www.blender.org/'
 	},
-];
+};

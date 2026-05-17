@@ -10,7 +10,7 @@ export default function ThemeToggle() {
 			className="rounded-lg p-2 hover:bg-accent transition-colors"
 			aria-label="Toggle theme"
 		>
-			{theme === 'light' ? <Moon className="size-5" /> : <Sun className="size-5" />}
+			{theme === 'light' ? <Moon className="size-4" /> : <Sun className="size-4" />}
 		</button>
 	);
 }

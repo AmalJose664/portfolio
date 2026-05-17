@@ -1,9 +1,10 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import Width from '../utils/Width';
-import ShadowBox from '../ui/ShadowBox';
 import { skills } from '../../lib/data';
 import type { Skill } from '../../lib/types';
+import SplitText from '../ui/SplitText';
+import TechStackUI from '../ui/TechStackUI';
 
 const CATEGORY_ORDER = [
 	'programming language',
@@ -23,21 +24,6 @@ const CATEGORY_LABELS: Record<string, string> = {
 	'others': 'Others'
 };
 
-function isValidIconSrc(src: string): boolean {
-	return (
-		src.startsWith('data:image') ||
-		src.startsWith('https://') ||
-		src.startsWith('http://')
-	) && !src.startsWith('http://0.0.0.0');
-}
-
-function getIconSrc(icon: Skill['icon']): string | null {
-	if (!icon) return null;
-	if (typeof icon === 'string') {
-		return isValidIconSrc(icon) ? icon : null;
-	}
-	return null;
-}
 
 function StaggerContainer({
 	children,
@@ -110,9 +96,10 @@ export default function Technologies() {
 	}, []);
 
 	// Group by category
+	const skillsArray = Object.values(skills);
 	const grouped = CATEGORY_ORDER.reduce(
 		(acc, cat) => {
-			const items = skills.filter(
+			const items = skillsArray.filter(
 				(s) => s.category.toLowerCase() === cat.toLowerCase()
 			);
 			if (items.length) acc[cat] = items;
@@ -135,7 +122,8 @@ export default function Technologies() {
 						<p className="mb-2 text-xs font-semibold uppercase tracking-widest text-primary">
 							Tech Stack
 						</p>
-						<h1 className="mb-4 text-4xl font-bold">Tools of the trade</h1>
+
+						<SplitText className="mb-4 text-4xl font-bold" text='Tools of the trade' />
 						<p className="text-sm text-muted-foreground max-w-2xl">
 							The languages, frameworks, and platforms I rely on to build mission-critical systems.
 						</p>
@@ -149,30 +137,9 @@ export default function Technologies() {
 								</p>
 								<StaggerContainer className="flex flex-wrap gap-2.5">
 									{items.map((skill) => {
-										const iconSrc = getIconSrc(skill.icon);
 										return (
-											<StaggerItem key={skill.skill}>
-												<ShadowBox
-													as="a"
-													href={skill.href !== '/' ? skill.href : undefined}
-													target="_blank"
-													rel="noopener noreferrer"
-													variant="default"
-													className="inline-flex items-center gap-2 rounded-xl bg-card px-3.5 py-2 hover:bg-card/80 group"
-												>
-													{iconSrc && (
-														<img
-															src={iconSrc}
-															alt={skill.skill}
-															width={16}
-															height={16}
-															className={`flex-shrink-0 object-contain ${skill.invert && isDark ? 'invert' : ''}`}
-														/>
-													)}
-													<span className="text-sm text-muted-foreground transition-colors group-hover:text-foreground">
-														{skill.skill}
-													</span>
-												</ShadowBox>
+											<StaggerItem key={skill.commonName}>
+												<TechStackUI skill={skill} isDark={isDark} />
 											</StaggerItem>
 										);
 									})}

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface CarouselProps {
@@ -6,68 +6,133 @@ interface CarouselProps {
 }
 
 export default function Carousel({ images }: CarouselProps) {
-	const [currentIndex, setCurrentIndex] = useState(0);
+	const [current, setCurrent] = useState(1);
+	const [animating, setAnimating] = useState(false);
+	const [paused, setPaused] = useState(false);
+	const [key, setKey] = useState(0);
+	const progressRef = useRef<HTMLDivElement>(null);
 
-	const goToPrevious = () => {
-		setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+	// Auto-play
+	useEffect(() => {
+		if (paused) return;
+
+		const timeout = setTimeout(() => {
+			goNext();
+		}, 5000);
+
+		return () => clearTimeout(timeout);
+	}, [current, paused]);
+
+	const goNext = () => {
+		setAnimating(true);
+		setCurrent((prev) => prev + 1);
+		setKey((prev) => prev + 1);
+
+		setTimeout(() => {
+			setAnimating(false);
+			setCurrent((prev) => {
+				if (prev > images.length) {
+					return 1;
+				}
+				return prev;
+			});
+		}, 200);
 	};
 
-	const goToNext = () => {
-		setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+	const goPrev = () => {
+		setAnimating(true);
+		setCurrent((prev) => prev - 1);
+		setKey((prev) => prev + 1);
+
+		setTimeout(() => {
+			setAnimating(false);
+			setCurrent((prev) => {
+				if (prev === 0) {
+					return images.length;
+				}
+				return prev;
+			});
+		}, 200);
 	};
 
 	const goToSlide = (index: number) => {
-		setCurrentIndex(index);
+		setCurrent(index + 1);
+		setKey((prev) => prev + 1);
 	};
 
 	if (images.length === 0) return null;
 
-	return (
-		<div className="relative mb-12 overflow-hidden rounded-lg">
-			{/* Main Image */}
-			<div className="relative aspect-video bg-muted">
-				<img
-					src={images[currentIndex].src}
-					alt={images[currentIndex].alt}
-					className="h-full w-full object-cover"
-					loading="eager"
-				/>
+	// Create extended array with duplicates for infinite loop effect
+	const extendedImages = [images[images.length - 1], ...images, images[0]];
 
-				{/* Navigation Arrows */}
-				{images.length > 1 && (
-					<>
-						<button
-							onClick={goToPrevious}
-							className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 backdrop-blur-sm transition-colors hover:bg-background"
-							aria-label="Previous image"
-						>
-							<ChevronLeft className="size-6" />
-						</button>
-						<button
-							onClick={goToNext}
-							className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-background/80 p-2 backdrop-blur-sm transition-colors hover:bg-background"
-							aria-label="Next image"
-						>
-							<ChevronRight className="size-6" />
-						</button>
-					</>
-				)}
+	return (
+		<div
+			className="mb-12"
+			onMouseEnter={() => setPaused(true)}
+			onMouseLeave={() => setPaused(false)}
+		>
+			{/* Image Container */}
+			<div className="flex overflow-hidden rounded-lg">
+				{extendedImages.map((image, index) => (
+					<img
+						key={`${image.src}-${index}`}
+						src={image.src}
+						alt={image.alt}
+						className={`aspect-video w-full flex-shrink-0 bg-muted object-contain ${animating ? 'transition-transform duration-200' : ''
+							}`}
+						style={{ transform: `translateX(-${current * 100}%)` }}
+						loading={index === current ? 'eager' : 'lazy'}
+					/>
+				))}
 			</div>
 
-			{/* Dots Indicator */}
-			{images.length > 1 && (
-				<div className="mt-4 flex justify-center gap-2">
+			{/* Progress Bar */}
+			<div className="mb-2 mt-2 h-1 w-full overflow-hidden rounded-full bg-muted">
+				<div
+					key={key}
+					ref={progressRef}
+					className={`h-full bg-primary ${paused ? '' : 'animate-progress'}`}
+					style={{ width: paused ? progressRef.current?.style.width || '0%' : '0%' }}
+				/>
+			</div>
+
+			{/* Controls */}
+			<div className="flex items-center justify-center gap-4">
+				<button
+					onClick={goPrev}
+					disabled={animating}
+					className="aspect-square rounded-md p-1 transition-colors hover:bg-accent disabled:opacity-50"
+					aria-label="Previous image"
+				>
+					<ChevronLeft className="size-6" />
+				</button>
+
+				{/* Dots */}
+				<ul className="flex gap-1">
 					{images.map((_, index) => (
-						<button
-							key={index}
-							onClick={() => goToSlide(index)}
-							className={`h-2 rounded-full transition-all ${index === currentIndex ? 'w-8 bg-primary' : 'w-2 bg-muted-foreground/30'
-								}`}
-							aria-label={`Go to image ${index + 1}`}
-						/>
+						<li key={index}>
+							<button
+								onClick={() => goToSlide(index)}
+								className="size-4 rounded-full bg-muted p-0.5 transition-colors hover:bg-accent"
+								aria-label={`Go to image ${index + 1}`}
+							>
+								{current - 1 === index && (
+									<span className="block h-full w-full rounded-full bg-primary"></span>
+								)}
+							</button>
+						</li>
 					))}
-				</div>
-			)}
+				</ul>
+
+				<button
+					onClick={goNext}
+					disabled={animating}
+					className="aspect-square rounded-md p-1 transition-colors hover:bg-accent disabled:opacity-50"
+					aria-label="Next image"
+				>
+					<ChevronRight className="size-6" />
+				</button>
+			</div>
 		</div>
 	);
 }

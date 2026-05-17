@@ -7,12 +7,12 @@ import Signature from './Signature';
 
 function DesktopNav() {
 	return (
-		<nav className="fixed left-1/2 top-4 z-50 -translate-x-1/2 rounded-full border border-teal-700/40! bg-card/80 px-8 py-2 shadow backdrop-blur-sm max-lg:hidden">
+		<nav className="fixed left-1/2 top-4 z-50 -translate-x-1/2 rounded-full border border-teal-700/40! bg-card/80 px-8 shadow backdrop-blur-sm max-lg:hidden">
 			<ul className="flex items-center gap-6">
 				{links.map((link, index) => (
 					<Fragment key={index}>
 						<li >
-							<a href={link.href} className="hover:text-primary transition-colors">
+							<a href={link.href} className="hover:text-primary transition-colors text-xs">
 								{link.name}
 							</a>
 						</li>

@@ -45,15 +45,46 @@ export interface SkillIcon {
 }
 
 export interface Skill {
-	href: string;
-	icon: string;
-	skill: string;
+	name: string; // Display name
+	commonName: string; // Key for accessing (e.g., 'javascript', 'express')
 	category: string;
+	icon: string;
+	href: string;
 	invert?: boolean;
+}
+
+export interface SkillsObject {
+	[key: string]: Skill;
 }
 
 export interface Tool {
 	name: string;
 	file: string;
 	options: { bg: string; invert?: boolean };
+}
+
+export interface SideProject {
+	id: string;
+	title: string;
+	description: string;
+	stack: string[];
+	github?: string;
+	live?: string;
+}
+
+export interface Education {
+	title: string;
+	institution: string;
+	location?: string;
+	startDate?: Date;
+	endDate?: Date | 'Present';
+	description?: string;
+}
+
+export interface Certification {
+	title: string;
+	issuer: string;
+	date?: Date;
+	description?: string;
+	url?: string;
 }
